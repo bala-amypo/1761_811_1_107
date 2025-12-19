@@ -23,7 +23,9 @@ public class Parcel {
    // @OneToMany(mappedBy = "parcel", cascade = CascadeType.ALL)
     //private List<DamageClaim> claims;
 
-    public Parcel() {}
+    public Parcel() {
+        
+    }
 
     
     public Parcel(String trackingNumber, String senderName, String receiverName, Double weightKg,LocalDateTime deliveredAt) {
