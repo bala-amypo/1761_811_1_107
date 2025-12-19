@@ -20,7 +20,7 @@ public class Parcel {
     private String trackingNumber;
     private String senderName;
     private String receiverName;
-    @Size(min=0)
+    @Min(value=0)
     private Double weightKg;
     private LocalDateTime DeliveredAt;
     public Parcel(Long id, String trackingNumber, String senderName, String receiverName, Double weightKg,
