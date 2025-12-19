@@ -31,7 +31,7 @@ public class Parcel {
         this.senderName = senderName;
         this.receiverName = receiverName;
         this.weightKg = weightKg;
-        DeliveredAt = deliveredAt;
+        this.deliveredAt = deliveredAt;
     }
     public Parcel() {
     }
@@ -68,10 +68,10 @@ public class Parcel {
         this.weightKg = weightKg;
     }
     public LocalDateTime getDeliveredAt() {
-        return DeliveredAt;
+        return deliveredAt;
     }
     public void setDeliveredAt(LocalDateTime deliveredAt) {
-        DeliveredAt = deliveredAt;
+        deliveredAt = deliveredAt;
     }
 
     
