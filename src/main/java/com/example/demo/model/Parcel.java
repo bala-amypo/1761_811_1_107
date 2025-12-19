@@ -22,7 +22,7 @@ public class Parcel {
     private String receiverName;
     @Min(value=0)
     private Double weightKg;
-    private LocalDateTime DeliveredAt;
+    private LocalDateTime deliveredAt;
     public Parcel( Long id,String trackingNumber, String senderName, String receiverName, Double weightKg,
             LocalDateTime deliveredAt) {
         this.id = id;
@@ -30,7 +30,7 @@ public class Parcel {
         this.senderName = senderName;
         this.receiverName = receiverName;
         this.weightKg = weightKg;
-        DeliveredAt = deliveredAt;
+        deliveredAt = deliveredAt;
     }
     public Parcel() {
     }
@@ -67,10 +67,10 @@ public class Parcel {
         this.weightKg = weightKg;
     }
     public LocalDateTime getDeliveredAt() {
-        return DeliveredAt;
+        return deliveredAt;
     }
     public void setDeliveredAt(LocalDateTime deliveredAt) {
-        DeliveredAt = deliveredAt;
+        deliveredAt = deliveredAt;
     }
 
     
