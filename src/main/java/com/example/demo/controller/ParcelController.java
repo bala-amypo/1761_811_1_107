@@ -16,7 +16,7 @@ public class ParcelController {
         this.parcelService = parcelService;
     }
 
-    @PostMapping
+    @PostMapping("/addParcel")
     public ResponseEntity<Parcel> addParcel(@RequestBody Parcel parcel) {
         return ResponseEntity.ok(parcelService.addParcel(parcel));
     }

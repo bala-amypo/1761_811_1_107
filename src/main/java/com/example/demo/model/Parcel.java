@@ -26,11 +26,12 @@ public class Parcel {
     public Parcel() {}
 
     // Parameterized constructor as per requirement
-    public Parcel(String trackingNumber, String senderName, String receiverName, Double weightKg) {
+    public Parcel(String trackingNumber, String senderName, String receiverName, Double weightKg,LocalDateTime deliveredAt) {
         this.trackingNumber = trackingNumber;
         this.senderName = senderName;
         this.receiverName = receiverName;
         this.weightKg = weightKg;
+        this.deliveredAt=deliveredAt;
     }
 
     // Getters and Setters
