@@ -10,8 +10,9 @@ import com.example.demo.model.Parcel;
 @Repository
 public interface ParcelRepository extends JpaRepository<Parcel, Long> {
 
+    public Parcel save(Parcel p);
 
-    Optional<Parcel> findByTrackingNumber(String trackingNumber);
+    public Optional<Parcel> findByTrackingNumber(String trackingNumber);
 
     
 } 
