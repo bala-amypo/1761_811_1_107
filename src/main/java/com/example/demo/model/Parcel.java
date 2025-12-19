@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 //import jakarta.persistence.GeneratedValue;
 //import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.DecimalMin;
 
 @Entity
 public class Parcel {
@@ -20,7 +20,7 @@ public class Parcel {
     private String trackingNumber;
     private String senderName;
     private String receiverName;
-    @Min(value=0)
+    @DecimalMin(value=0)
     private Double weightKg;
     private LocalDateTime deliveredAt;
     public Parcel( Long id,String trackingNumber, String senderName, String receiverName, Double weightKg,
@@ -30,7 +30,7 @@ public class Parcel {
         this.senderName = senderName;
         this.receiverName = receiverName;
         this.weightKg = weightKg;
-        deliveredAt = deliveredAt;
+        this.deliveredAt = deliveredAt;
     }
     public Parcel() {
     }
