@@ -25,6 +25,6 @@ public class ParcelServiceimpl implements ParcelService {
     @Override
     public Optional<Parcel> getParcel(String trackingNumber){
         // return repo.findByTrackingNumber(trackingNumber).orElseThrow(() -> new ResourceNotFoundException("not"));
-        return Optional.ofNullable(repo.findByTrackingNumber(trackingNumber).orElseThrow(() -> new ResourceNotFoundException("not")));
+        return Optional.ofNullable(repo.findByTrackingNumber(trackingNumber).orElseThrow(() -> new ResourceNotFoundException("Duplicate tracking number")));
     }
 }
