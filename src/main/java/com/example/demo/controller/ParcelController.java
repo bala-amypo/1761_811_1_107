@@ -21,7 +21,7 @@ public class ParcelController {
     }
     @GetMapping("/getParcels/{trackingNumber}")
     public Parcel getParcel(@PathVariable String trackingNumber) {
-        return ser.getParcel(trackingNumber);
+        return ser.getParcel(trackingNumber)
     }
 
     
