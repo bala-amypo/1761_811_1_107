@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+//import jakarta.persistence.GeneratedValue;
+//import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.DecimalMin;
 
@@ -15,7 +15,7 @@ import jakarta.validation.constraints.DecimalMin;
 @Entity
 public class Parcel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
     private String trackingNumber;
@@ -23,7 +23,7 @@ public class Parcel {
     private String receiverName;
     @DecimalMin(value = "0.0")
     private Double weightKg;
-    private LocalDateTime DeliveredAt;
+    private LocalDateTime deliveredAt;
     public Parcel(Long id, String trackingNumber, String senderName, String receiverName, Double weightKg,
             LocalDateTime deliveredAt) {
         // this.id = id;
