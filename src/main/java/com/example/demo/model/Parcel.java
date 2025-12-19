@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
+
 
 @Entity
 @Table(name = "parcels")
@@ -20,8 +20,8 @@ public class Parcel {
     private LocalDateTime deliveredAt;
 
     // Relationship: One parcel can have multiple claims
-    @OneToMany(mappedBy = "parcel", cascade = CascadeType.ALL)
-    private List<DamageClaim> claims;
+   // @OneToMany(mappedBy = "parcel", cascade = CascadeType.ALL)
+    //private List<DamageClaim> claims;
 
     public Parcel() {}
 
