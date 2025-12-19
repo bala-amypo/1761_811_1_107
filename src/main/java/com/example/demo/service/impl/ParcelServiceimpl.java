@@ -18,7 +18,7 @@ public class ParcelServiceimpl implements ParcelService {
     @Autowired
     ParcelRepository repo;
 
-     @Override
+    @Override
     public Parcel addParcel(Parcel p){
         return repo.save(p);
     }
