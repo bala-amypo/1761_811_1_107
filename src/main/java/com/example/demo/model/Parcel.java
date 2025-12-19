@@ -25,7 +25,7 @@ public class Parcel {
     private LocalDateTime DeliveredAt;
     public Parcel(Long id, String trackingNumber, String senderName, String receiverName, Double weightKg,
             LocalDateTime deliveredAt) {
-        // this.id = id;
+        this.id = id;
         this.trackingNumber = trackingNumber;
         this.senderName = senderName;
         this.receiverName = receiverName;
