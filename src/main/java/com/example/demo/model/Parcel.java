@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Table(name = "parcels")
 public class Parcel {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)
@@ -24,9 +25,8 @@ public class Parcel {
 
     public Parcel() {}
 
-    // Parameterized constructor as per requirement
-    public Parcel(Long id,String trackingNumber, String senderName, String receiverName, Double weightKg,LocalDateTime deliveredAt) {
-        this.id=id;
+    
+    public Parcel(String trackingNumber, String senderName, String receiverName, Double weightKg,LocalDateTime deliveredAt) {
         this.trackingNumber = trackingNumber;
         this.senderName = senderName;
         this.receiverName = receiverName;
