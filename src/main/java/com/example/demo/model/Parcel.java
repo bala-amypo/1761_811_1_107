@@ -5,23 +5,24 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Parcel {
     @Id
     private Long id;
     @Column(unique = true)
-    @NotBlank(message = "Not")
     private String trackingNumber;
     private String senderName;
     private String receiverName;
+    @Size(min=0)
     private Double weightKg;
     private LocalDateTime DeliveredAt;
     public Parcel(Long id, String trackingNumber, String senderName, String receiverName, Double weightKg,
             LocalDateTime deliveredAt) {
-        this.id = id;
+        // this.id = id;
         this.trackingNumber = trackingNumber;
         this.senderName = senderName;
         this.receiverName = receiverName;
