@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.Id;
 
 @Entity
@@ -12,6 +13,7 @@ public class Parcel {
     @Id
     private Long id;
     @Column(unique = true)
+    @NotBlank(message = "Not")
     private String trackingNumber;
     private String senderName;
     private String receiverName;
