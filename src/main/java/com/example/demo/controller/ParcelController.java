@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,7 @@ public class ParcelController {
         return ser.addParcel(p);
     }
     @GetMapping("/getParcels/{trackingNumber}")
-    public Parcel getParcel(@PathVariable String trackingNumber) {
+    public Optional<Parcel> getParcel(@PathVariable String trackingNumber) {
         return ser.getParcel(trackingNumber);
     }
 
