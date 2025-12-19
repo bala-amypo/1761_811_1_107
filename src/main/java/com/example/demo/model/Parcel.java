@@ -24,7 +24,7 @@ public class Parcel {
     //private List<DamageClaim> claims;
 
     public Parcel() {
-        
+
     }
 
     
@@ -37,8 +37,8 @@ public class Parcel {
     }
 
     // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    //public Long getId() { return id; }
+    //public void setId(Long id) { this.id = id; }
     public String getTrackingNumber() { return trackingNumber; }
     public void setTrackingNumber(String trackingNumber) { this.trackingNumber = trackingNumber; }
     public String getSenderName() { return senderName; }
