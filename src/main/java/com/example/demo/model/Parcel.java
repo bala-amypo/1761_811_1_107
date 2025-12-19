@@ -71,7 +71,7 @@ public class Parcel {
         return deliveredAt;
     }
     public void setDeliveredAt(LocalDateTime deliveredAt) {
-        deliveredAt = deliveredAt;
+        this.deliveredAt = deliveredAt;
     }
 
     

@@ -1,30 +1,28 @@
 package com.example.demo.controller;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import com.example.demo.model.Parcel;
 import com.example.demo.service.ParcelService;
 
 @RestController
+@RequestMapping("/parcels") // Base path as per requirement
 public class ParcelController {
-    @Autowired
-    ParcelService ser;
 
-    @PostMapping("/addParcel")
-    public Parcel addParcel(@RequestBody Parcel p) {
-        return ser.addParcel(p);
-    }
-    @GetMapping("/getParcels/{trackingNumber}")
-    public Optional<Parcel> getParcel(@PathVariable String trackingNumber) {
-        return ser.getParcel(trackingNumber);
+    private final ParcelService parcelService;
+
+    // Constructor Injection (REQUIRED)
+    public ParcelController(ParcelService parcelService) {
+        this.parcelService = parcelService;
     }
 
-    
+    @PostMapping
+    public ResponseEntity<Parcel> addParcel(@RequestBody Parcel parcel) {
+        return ResponseEntity.ok(parcelService.addParcel(parcel));
+    }
+
+    @GetMapping("/tracking/{trackingNumber}")
+    public ResponseEntity<Parcel> getByTracking(@PathVariable String trackingNumber) {
+        return ResponseEntity.ok(parcelService.getByTrackingNumber(trackingNumber));
+    }
 }
