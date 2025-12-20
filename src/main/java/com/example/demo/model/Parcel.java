@@ -12,28 +12,23 @@ public class Parcel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String trackingNumber;
 
     private String senderName;
     private String receiverName;
-
-    @Column(nullable = false)
     private Double weightKg;
-
     private LocalDateTime deliveredAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "parcel", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parcel")
     private List<DamageClaim> damageClaims;
 
-    // No-arg constructor
     public Parcel() {}
 
-    // Parameterized constructor
     public Parcel(String trackingNumber, String senderName, String receiverName, Double weightKg) {
         this.trackingNumber = trackingNumber;
         this.senderName = senderName;
@@ -43,10 +38,15 @@ public class Parcel {
 
     // Getters and Setters
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
     public String getTrackingNumber() { return trackingNumber; }
+    public void setTrackingNumber(String trackingNumber) { this.trackingNumber = trackingNumber; }
+    public String getSenderName() { return senderName; }
+    public void setSenderName(String senderName) { this.senderName = senderName; }
+    public String getReceiverName() { return receiverName; }
+    public void setReceiverName(String receiverName) { this.receiverName = receiverName; }
     public Double getWeightKg() { return weightKg; }
     public void setWeightKg(Double weightKg) { this.weightKg = weightKg; }
     public LocalDateTime getDeliveredAt() { return deliveredAt; }
     public void setDeliveredAt(LocalDateTime deliveredAt) { this.deliveredAt = deliveredAt; }
-    // ... other getters/setters
 }
