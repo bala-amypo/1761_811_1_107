@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class EvidenceServiceImpl implements EvidenceService {
+public class EvidenceServiceimpl implements EvidenceService {
 
     private final EvidenceRepository evidenceRepository;
     private final DamageClaimRepository claimRepository;
 
     // REQUIRED constructor signature
-    public EvidenceServiceImpl(EvidenceRepository evidenceRepository, DamageClaimRepository claimRepository) {
+    public EvidenceServiceimpl(EvidenceRepository evidenceRepository, DamageClaimRepository claimRepository) {
         this.evidenceRepository = evidenceRepository;
         this.claimRepository = claimRepository;
     }
