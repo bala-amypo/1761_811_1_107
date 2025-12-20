@@ -1,17 +1,16 @@
 package com.example.demo.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import com.example.demo.model.Parcel;
 import com.example.demo.service.ParcelService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/parcels") // Base path as per requirement
+@RequestMapping("/parcels")
 public class ParcelController {
 
     private final ParcelService parcelService;
 
-    // Constructor Injection (REQUIRED)
     public ParcelController(ParcelService parcelService) {
         this.parcelService = parcelService;
     }
@@ -22,7 +21,7 @@ public class ParcelController {
     }
 
     @GetMapping("/tracking/{trackingNumber}")
-    public ResponseEntity<Parcel> getByTracking(@PathVariable String trackingNumber) {
+    public ResponseEntity<Parcel> getByTrackingNumber(@PathVariable String trackingNumber) {
         return ResponseEntity.ok(parcelService.getByTrackingNumber(trackingNumber));
     }
 }
