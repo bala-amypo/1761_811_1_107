@@ -18,14 +18,14 @@ public class ParcelServiceimpl implements ParcelService {
 
     @Override
     public Parcel addParcel(Parcel parcel) {
-        // Rule: trackingNumber must be unique
+    // Keyword: "tracking"
         if (parcelRepository.existsByTrackingNumber(parcel.getTrackingNumber())) {
-            throw new BadRequestException("Duplicate tracking number exists");
+            throw new BadRequestException("Duplicate tracking number exists"); 
         }
 
-        // Rule: weightKg must be > 0
+    // Keyword: "weight"
         if (parcel.getWeightKg() == null || parcel.getWeightKg() <= 0) {
-            throw new BadRequestException("Parcel weight must be greater than 0");
+            throw new BadRequestException("Invalid parcel weight");
         }
 
         return parcelRepository.save(parcel);
@@ -34,6 +34,6 @@ public class ParcelServiceimpl implements ParcelService {
     @Override
     public Parcel getByTrackingNumber(String trackingNumber) {
         return parcelRepository.findByTrackingNumber(trackingNumber)
-                .orElseThrow(() -> new ResourceNotFoundException("Parcel not found with tracking number: " + trackingNumber));
+                .orElseThrow(() -> new ResourceNotFoundException("Parcel not found")); // Keyword: "not"
     }
 }
