@@ -1,11 +1,12 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.DamageClaim;
+import com.example.demo.model.Evidence;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DamageClaimRepository extends JpaRepository<DamageClaim, Long> {
-    List<DamageClaim> findByParcel_Id(Long parcelId);
+public interface EvidenceRepository extends JpaRepository<Evidence, Long> {
+    long countByClaim_Id(Long claimId);
+    List<Evidence> findByClaim_Id(Long claimId);
 }
