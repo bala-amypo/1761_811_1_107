@@ -6,7 +6,7 @@ import com.example.demo.model.Parcel;
 import com.example.demo.repository.ParcelRepository;
 import org.springframework.stereotype.Service;
 
-@Service
+@service
 public class ParcelServiceimpl implements ParcelService {
 
     private final ParcelRepository parcelRepository;
