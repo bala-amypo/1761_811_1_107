@@ -17,58 +17,31 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final JwtAuthenticationFilter jwtFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    // Rule: Constructor injection only
-    public SecurityConfig(JwtAuthenticationFilter jwtFilter) {
-        this.jwtFilter = jwtFilter;
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
-    /**
-     * Requirement 8.2: Provide PasswordEncoder bean (BCryptPasswordEncoder).
-     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    /**
-     * Required for manual authentication in AuthController login.
-     */
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 
-    /**
-     * Requirement 8.2: Configure HTTP security settings.
-     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            // Requirement 8.2: Disable CSRF for this REST API
-            .csrf(csrf -> csrf.disable())
-            
-            // Requirement 8.2: Use stateless session management (no HTTP session)
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            
-            // Requirement 8.2: Path-based access control
+        http.csrf(csrf -> csrf.disable())
+            .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                // Public paths (no authentication required)
-                .requestMatchers("/auth/register", "/auth/login").permitAll()
-                // Requirement 9: Allow Swagger endpoints without authentication
-                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
-                
-                // Protected paths (Section 8.2: require valid JWT)
-                .requestMatchers("/parcels/**", "/claims/**", "/evidence/**", "/rules/**").authenticated()
-                
-                // Any other request must be authenticated
+                .requestMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui/index.html").permitAll()
                 .anyRequest().authenticated()
-            );
-
-        // Requirement 8.2 & 8.4: Register JWT filter before UsernamePasswordAuthenticationFilter
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
+            )
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }

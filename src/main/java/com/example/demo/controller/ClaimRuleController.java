@@ -5,27 +5,19 @@ import com.example.demo.service.ClaimRuleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/rules")
 public class ClaimRuleController {
-
     private final ClaimRuleService ruleService;
-
-    public ClaimRuleController(ClaimRuleService ruleService) {
-        this.ruleService = ruleService;
-    }
+    public ClaimRuleController(ClaimRuleService ruleService) { this.ruleService = ruleService; }
 
     @PostMapping
-    public ResponseEntity<ClaimRule> addRule(@RequestBody ClaimRule rule) {
-        ClaimRule savedRule = ruleService.addRule(rule);
-        return ResponseEntity.ok(savedRule);
+    public ResponseEntity<?> addRule(@RequestBody ClaimRule rule) {
+        return ResponseEntity.ok(ruleService.addRule(rule));
     }
 
     @GetMapping
-    public ResponseEntity<List<ClaimRule>> getAllRules() {
-        List<ClaimRule> rules = ruleService.getAllRules();
-        return ResponseEntity.ok(rules);
+    public ResponseEntity<?> getAllRules() {
+        return ResponseEntity.ok(ruleService.getAllRules());
     }
 }
