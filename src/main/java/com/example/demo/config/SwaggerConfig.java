@@ -22,8 +22,8 @@ public class SwaggerConfig {
                     .scheme("bearer")
                     .bearerFormat("JWT")));
              
-                .servers(List.of(
-                        new Server().url("https://9330.pro604cr.amypo.ai/")
-                ));
+        .servers(List.of(
+                new Server().url("https://9330.pro604cr.amypo.ai/")
+        ));
         }
 }
