@@ -1,5 +1,5 @@
-package com.example.demo.model.ClaimRule.java
-```java
+package com.example.demo.model.ClaimRule.java;
+
 package com.example.demo.model;
 
 import jakarta.persistence.*;
