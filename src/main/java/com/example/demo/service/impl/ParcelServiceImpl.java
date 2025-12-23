@@ -7,12 +7,12 @@ import com.example.demo.repository.ParcelRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ParcelServiceimpl implements ParcelService {
+public class ParcelServiceImpl implements ParcelService {
 
     private final ParcelRepository parcelRepository;
 
     // REQUIRED constructor signature
-    public ParcelServiceimpl(ParcelRepository parcelRepository) {
+    public ParcelServiceImpl(ParcelRepository parcelRepository) {
         this.parcelRepository = parcelRepository;
     }
 
