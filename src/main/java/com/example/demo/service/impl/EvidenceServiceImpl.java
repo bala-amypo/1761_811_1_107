@@ -11,11 +11,9 @@ import java.util.List;
 
 @Service
 public class EvidenceServiceImpl implements EvidenceService {
-
     private final EvidenceRepository evidenceRepository;
     private final DamageClaimRepository claimRepository;
 
-    // REQUIRED constructor signature
     public EvidenceServiceImpl(EvidenceRepository evidenceRepository, DamageClaimRepository claimRepository) {
         this.evidenceRepository = evidenceRepository;
         this.claimRepository = claimRepository;
@@ -24,8 +22,7 @@ public class EvidenceServiceImpl implements EvidenceService {
     @Override
     public Evidence uploadEvidence(Long claimId, Evidence evidence) {
         DamageClaim claim = claimRepository.findById(claimId)
-                .orElseThrow(() -> new ResourceNotFoundException("Claim not found"));
-
+                .orElseThrow(() -> new ResourceNotFoundException("claim not found"));
         evidence.setClaim(claim);
         return evidenceRepository.save(evidence);
     }

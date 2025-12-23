@@ -4,27 +4,22 @@ import com.example.demo.model.ClaimRule;
 import java.util.List;
 
 public class RuleEngineUtil {
-    
-    // The Test Suite specifically looks for this method name and signature
-    public static Double computeScore(String description, List<ClaimRule> rules) {
-        if (description == null) description = "";
-        double totalScore = 0.0;
-        String descLower = description.toLowerCase();
-
+    public static double computeScore(String description, List<ClaimRule> rules) {
+        double score = 0.0;
+        if (description == null) return 0.0;
+        String desc = description.toLowerCase();
+        
         for (ClaimRule rule : rules) {
-            String condition = rule.getConditionExpression().toLowerCase();
-            
-            if ("always".equals(condition)) {
-                totalScore += rule.getWeight();
-            } else if (condition.startsWith("description_contains:")) {
-                String keyword = condition.split(":")[1].trim();
-                if (descLower.contains(keyword)) {
-                    totalScore += rule.getWeight();
+            String expr = rule.getConditionExpression().toLowerCase();
+            if (expr.equals("always")) {
+                score += rule.getWeight();
+            } else if (expr.startsWith("description_contains:")) {
+                String keyword = expr.split(":")[1];
+                if (desc.contains(keyword)) {
+                    score += rule.getWeight();
                 }
             }
         }
-        // Return score (usually capped at 1.0 in business logic, 
-        // but return the raw sum if that's what tests expect)
-        return totalScore;
+        return Math.min(score, 1.0); // capped at 1.0 as per business context
     }
 }
