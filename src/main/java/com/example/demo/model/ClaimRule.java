@@ -16,6 +16,7 @@ public class ClaimRule {
         this.ruleName = ruleName; this.conditionExpression = conditionExpression; this.weight = weight;
     }
     // Getters and Setters
+    public String getruleName(){ return ruleName; }
     public String getConditionExpression() { return conditionExpression; }
     public Double getWeight() { return weight; }
 }
