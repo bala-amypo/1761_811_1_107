@@ -12,12 +12,12 @@ public class ParcelController {
     public ParcelController(ParcelService parcelService) { this.parcelService = parcelService; }
 
     @PostMapping
-    public ResponseEntity<?> addParcel(@RequestBody Parcel parcel) {
+    public ResponseEntity<Parcel> addParcel(@RequestBody Parcel parcel) {
         return ResponseEntity.ok(parcelService.addParcel(parcel));
     }
 
     @GetMapping("/tracking/{trackingNumber}")
-    public ResponseEntity<?> getByTracking(@PathVariable String trackingNumber) {
+    public ResponseEntity<Parcel> getByTracking(@PathVariable String trackingNumber) {
         return ResponseEntity.ok(parcelService.getByTrackingNumber(trackingNumber));
     }
 }
