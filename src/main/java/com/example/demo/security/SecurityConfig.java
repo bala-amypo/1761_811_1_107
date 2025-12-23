@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final JwtFilter jwtFilter;
+    private final JwtAuthenticationFilter jwtFilter;
 
     // Rule: Constructor injection only
     public SecurityConfig(JwtAuthenticationFilter jwtFilter) {
