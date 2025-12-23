@@ -20,7 +20,7 @@ public class SecurityConfig {
     private final JwtFilter jwtFilter;
 
     // Rule: Constructor injection only
-    public SecurityConfig(JwtFilter jwtFilter) {
+    public SecurityConfig(JwtAuthenticationFilter jwtFilter) {
         this.jwtFilter = jwtFilter;
     }
 
