@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ClaimRuleServiceimpl implements ClaimRuleService {
+public class ClaimRuleServiceImpl implements ClaimRuleService {
 
     private final ClaimRuleRepository ruleRepository;
 
     // REQUIRED constructor signature
-    public ClaimRuleServiceimpl(ClaimRuleRepository ruleRepository) {
+    public ClaimRuleServiceImpl(ClaimRuleRepository ruleRepository) {
         this.ruleRepository = ruleRepository;
     }
 

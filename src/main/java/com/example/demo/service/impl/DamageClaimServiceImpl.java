@@ -15,14 +15,14 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class DamageClaimServiceimpl implements DamageClaimService {
+public class DamageClaimServiceImpl implements DamageClaimService {
 
     private final ParcelRepository parcelRepository;
     private final DamageClaimRepository claimRepository;
     private final ClaimRuleRepository ruleRepository;
 
     // REQUIRED constructor signature
-    public DamageClaimServiceimpl(ParcelRepository parcelRepository, 
+    public DamageClaimServiceImpl(ParcelRepository parcelRepository, 
                                   DamageClaimRepository claimRepository, 
                                   ClaimRuleRepository ruleRepository) {
         this.parcelRepository = parcelRepository;
