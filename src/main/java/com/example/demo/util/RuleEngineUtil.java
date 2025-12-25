@@ -1,43 +1,25 @@
 package com.example.demo.util;
-
 import com.example.demo.model.ClaimRule;
 import java.util.List;
 
 public class RuleEngineUtil {
-
-    public static double computeScore(String description, List<ClaimRule> rules) {
-        if (description == null || rules == null || rules.isEmpty()) return 0.0;
-        
-        double matchedWeight = 0.0;
-        double totalWeight = 0.0;
-
-        for (ClaimRule rule : rules) {
-            totalWeight += rule.getWeight();
-            if (isRuleMatched(description, rule)) {
-                matchedWeight += rule.getWeight();
-            }
+    public static double computeScore(String desc, List<ClaimRule> rules) {
+        if (desc == null || rules.isEmpty()) return 0.0;
+        double matched = 0, total = 0;
+        for (ClaimRule r : rules) {
+            total += r.getWeight();
+            if (isMatch(desc, r)) matched += r.getWeight();
         }
-
-        if (totalWeight == 0) return 0.0;
-        double finalScore = matchedWeight / totalWeight;
-        
-        // Normalize for test expectations: score > 0.9 results in approval
-        return finalScore > 0.9 ? 1.0 : finalScore;
+        return (total == 0) ? 0.0 : matched / total;
     }
 
-    public static boolean isRuleMatched(String description, ClaimRule rule) {
-        if (description == null) return false;
-        String expression = rule.getConditionExpression();
-
-        if ("always".equalsIgnoreCase(expression)) {
-            return true;
+    public static boolean isMatch(String desc, ClaimRule rule) {
+        if (desc == null) return false;
+        String exp = rule.getConditionExpression();
+        if ("always".equalsIgnoreCase(exp)) return true;
+        if (exp != null && exp.startsWith("description_contains:")) {
+            return desc.toLowerCase().contains(exp.split(":")[1].toLowerCase());
         }
-
-        if (expression != null && expression.startsWith("description_contains:")) {
-            String keyword = expression.substring("description_contains:".length()).toLowerCase();
-            return description.toLowerCase().contains(keyword);
-        }
-
         return false;
     }
 }

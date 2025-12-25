@@ -1,5 +1,4 @@
 package com.example.demo.service.impl;
-
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.User;
@@ -11,27 +10,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    public UserServiceImpl(UserRepository userRepository) { this.userRepository = userRepository; }
     @Override
     public User register(User user) {
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new BadRequestException("Email already exists");
-        }
-        if (user.getRole() == null) {
-            user.setRole("AGENT");
-        }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (userRepository.existsByEmail(user.getEmail())) throw new BadRequestException("exists");
+        if (user.getRole() == null) user.setRole("AGENT");
+        user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
-
     @Override
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        return userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("not found"));
     }
 }
