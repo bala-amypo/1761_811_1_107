@@ -1,24 +1,19 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "evidence")
+@Data
 public class Evidence {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne @JoinColumn(name = "claim_id")
-    private DamageClaim claim;
-    private String evidenceType;
     private String fileUrl;
-    private LocalDateTime uploadedAt;
+    private LocalDateTime uploadedAt = LocalDateTime.now();
 
-    public Evidence() {}
-
-    @PrePersist
-    public void prePersist() { this.uploadedAt = LocalDateTime.now(); }
-
-    // Getters and Setters
-    public void setClaim(DamageClaim claim) { this.claim = claim; }
+    @ManyToOne
+    @JoinColumn(name = "claim_id")
+    private DamageClaim claim;
 }
