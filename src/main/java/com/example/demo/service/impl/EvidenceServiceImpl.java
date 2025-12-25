@@ -7,6 +7,7 @@ import com.example.demo.repository.DamageClaimRepository;
 import com.example.demo.repository.EvidenceRepository;
 import com.example.demo.service.EvidenceService;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -14,14 +15,16 @@ public class EvidenceServiceImpl implements EvidenceService {
     private final EvidenceRepository evidenceRepository;
     private final DamageClaimRepository claimRepository;
 
-    public EvidenceServiceImpl(EvidenceRepository evidenceRepository, DamageClaimRepository claimRepository) {
+    public EvidenceServiceImpl(EvidenceRepository evidenceRepository, 
+                               DamageClaimRepository claimRepository) {
         this.evidenceRepository = evidenceRepository;
         this.claimRepository = claimRepository;
     }
 
     @Override
     public Evidence uploadEvidence(Long claimId, Evidence evidence) {
-        DamageClaim claim = claimRepository.findById(claimId).orElseThrow(() -> new ResourceNotFoundException("claim not found"));
+        DamageClaim claim = claimRepository.findById(claimId)
+                .orElseThrow(() -> new ResourceNotFoundException("Claim not found"));
         evidence.setClaim(claim);
         return evidenceRepository.save(evidence);
     }

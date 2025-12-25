@@ -10,13 +10,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class ParcelServiceImpl implements ParcelService {
     private final ParcelRepository parcelRepository;
-    public ParcelServiceImpl(ParcelRepository parcelRepository) { this.parcelRepository = parcelRepository; }
+
+    public ParcelServiceImpl(ParcelRepository parcelRepository) {
+        this.parcelRepository = parcelRepository;
+    }
 
     @Override
     public Parcel addParcel(Parcel parcel) {
-        if (parcelRepository.existsByTrackingNumber(parcel.getTrackingNumber())) 
-            throw new BadRequestException("Duplicate tracking");
-        if (parcel.getWeightKg() <= 0) throw new BadRequestException("weightKg must be > 0");
+        if (parcelRepository.existsByTrackingNumber(parcel.getTrackingNumber())) {
+            throw new BadRequestException("Tracking number already exists");
+        }
+        if (parcel.getWeightKg() == null || parcel.getWeightKg() <= 0) {
+            throw new BadRequestException("Parcel weight must be > 0");
+        }
         return parcelRepository.save(parcel);
     }
 
