@@ -2,22 +2,26 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Parcel;
 import com.example.demo.service.ParcelService;
-import org.springframework.http.ResponseEntity;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/parcels")
+@Tag(name = "Parcels")
+@SecurityRequirement(name = "bearerAuth")
 public class ParcelController {
     private final ParcelService parcelService;
     public ParcelController(ParcelService parcelService) { this.parcelService = parcelService; }
 
     @PostMapping
-    public ResponseEntity<Parcel> addParcel(@RequestBody Parcel parcel) {
-        return ResponseEntity.ok(parcelService.addParcel(parcel));
-    }
+    @Operation(summary = "Add parcel")
+    public Parcel addParcel(@RequestBody Parcel parcel) { return parcelService.addParcel(parcel); }
 
     @GetMapping("/tracking/{trackingNumber}")
-    public ResponseEntity<Parcel> getByTracking(@PathVariable String trackingNumber) {
-        return ResponseEntity.ok(parcelService.getByTrackingNumber(trackingNumber));
+    @Operation(summary = "Get parcel by tracking")
+    public Parcel getByTracking(@PathVariable String trackingNumber) {
+        return parcelService.getByTrackingNumber(trackingNumber);
     }
 }
