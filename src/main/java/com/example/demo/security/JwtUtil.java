@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
-    private final String secret = "secretKeySecretKeySecretKeySecretKeySecretKeySecretKey";
+    private final String secret = "mySecretKeyForJwtAuthenticationWhichIsVeryLongAndSecure123!";
     private final long expiration = 3600000;
 
     public String generateToken(Long userId, String email, String role) {
@@ -23,6 +23,9 @@ public class JwtUtil {
     }
 
     public Claims validateToken(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        return Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody();
     }
 }
