@@ -1,14 +1,11 @@
 package com.example.demo.dto;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data @AllArgsConstructor @NoArgsConstructor
 public class ApiResponse {
     private boolean success;
     private String message;
     private Object data;
-    public ApiResponse(boolean success, String message, Object data) {
-        this.success = success; this.message = message; this.data = data;
-    }
-    // Getters and Setters
-    public boolean isSuccess() { return success; }
-    public String getMessage() { return message; }
-    public Object getData() { return data; }
 }

@@ -1,18 +1,15 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "users")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity @Table(name = "users") @Data @NoArgsConstructor
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(unique = true)
     private String email;
     private String password;
     private String role = "AGENT";
@@ -21,6 +18,6 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.role = (role == null) ? "AGENT" : role;
     }
 }

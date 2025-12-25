@@ -1,23 +1,21 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.util.Set;
 
-@Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity @Table(name = "claim_rules") @Data @NoArgsConstructor
 public class ClaimRule {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String ruleName;
-    private String expression;
+    private String conditionExpression;
     private Double weight;
 
-    public ClaimRule(String n, String e, Double w) {
-        this.ruleName = n;
-        this.expression = e;
-        this.weight = w;
+    public ClaimRule(String ruleName, String conditionExpression, Double weight) {
+        this.ruleName = ruleName;
+        this.conditionExpression = conditionExpression;
+        this.weight = weight;
     }
 }
