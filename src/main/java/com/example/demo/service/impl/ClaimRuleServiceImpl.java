@@ -1,6 +1,4 @@
 package com.example.demo.service.impl;
-
-import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.ClaimRule;
 import com.example.demo.repository.ClaimRuleRepository;
 import com.example.demo.service.ClaimRuleService;
@@ -9,17 +7,12 @@ import java.util.List;
 
 @Service
 public class ClaimRuleServiceImpl implements ClaimRuleService {
-    private final ClaimRuleRepository ruleRepository;
-    public ClaimRuleServiceImpl(ClaimRuleRepository ruleRepository) { this.ruleRepository = ruleRepository; }
+    private final ClaimRuleRepository repo;
+    public ClaimRuleServiceImpl(ClaimRuleRepository r) { this.repo = r; }
 
-    @Override
-    public ClaimRule addRule(ClaimRule rule) {
-        if (rule.getWeight() < 0) throw new BadRequestException("weight must be non-negative");
-        return ruleRepository.save(rule);
+    public ClaimRule addRule(ClaimRule r) {
+        if(r.getWeight() < 0) throw new RuntimeException("Weight must be >= 0");
+        return repo.save(r);
     }
-
-    @Override
-    public List<ClaimRule> getAllRules() {
-        return ruleRepository.findAll();
-    }
+    public List<ClaimRule> getAllRules() { return repo.findAll(); }
 }
