@@ -1,35 +1,19 @@
 package com.example.demo.model;
-
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
-import java.util.Set;
+import lombok.*;
+import java.util.*;
 
-@Entity
-@Table(name = "damage_claims")
+@Entity @Data @NoArgsConstructor
 public class DamageClaim {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne @JoinColumn(name = "parcel_id")
-    private Parcel parcel;
     private String claimDescription;
-    private LocalDateTime filedAt;
     private String status = "PENDING";
     private Double score;
+
+    @OneToOne @JoinColumn(name = "parcel_id")
+    private Parcel parcel;
+
     @ManyToMany
-    private Set<ClaimRule> appliedRules;
-
-    public DamageClaim() {}
-
-    @PrePersist
-    public void prePersist() { this.filedAt = LocalDateTime.now(); }
-
-    // Getters and Setters
-    public Long getId() { return id; }
-    public Parcel getParcel() { return parcel; }
-    public void setParcel(Parcel parcel) { this.parcel = parcel; }
-    public String getClaimDescription() { return claimDescription; }
-    public void setStatus(String status) { this.status = status; }
-    public String getStatus() { return status; }
-    public void setScore(Double score) { this.score = score; }
-    public void setAppliedRules(Set<ClaimRule> rules) { this.appliedRules = rules; }
+    private List<ClaimRule> appliedRules = new ArrayList<>();
 }
