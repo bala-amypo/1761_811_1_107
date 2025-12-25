@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface DamageClaimRepository extends JpaRepository<DamageClaim, Long> {
-    List<DamageClaim> findByParcel_Id(Long pid);
+    List<DamageClaim> findByParcel_Id(Long parcelId);
 }

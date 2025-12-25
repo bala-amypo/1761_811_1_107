@@ -1,34 +1,29 @@
 package com.example.demo.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
+import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 public class JwtUtil {
-    private String secret = "parcelValidatorSecretKeyForTest12345678901234567890";
-    private long expiration = 86400000;
+    private final String secret = "mySecretKeyForJwtAuthenticationWhichIsVeryLongAndSecure123!";
+    private final long expiration = 3600000;
+    private final Key key = Keys.hmacShaKeyFor(secret.getBytes());
 
     public String generateToken(Long userId, String email, String role) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", userId);
-        claims.put("role", role);
-        claims.put("email", email);
-        return Jwts.builder().setClaims(claims).setSubject(email)
-                .setIssuedAt(new Date()).setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(SignatureAlgorithm.HS256, secret).compact();
+        return Jwts.builder()
+                .setSubject(email)
+                .claim("userId", userId)
+                .claim("role", role)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
     }
 
-    public boolean validateToken(String token) {
-        Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
-        return true;
-    }
-
-    public String getEmailFromToken(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
+    public Claims validateToken(String token) {
+        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 }
